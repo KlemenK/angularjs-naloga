@@ -1,0 +1,36 @@
+
+<div>
+	<div class="row">
+		<label>Dodajanje projekta</label><br>
+		<label>Avtor:</label>
+		<input type="text" ng-model="novProjekt.avtor"/>
+		<label>Naziv projekta:</label>
+		<input type="text" ng-model="novProjekt.naziv"/>
+		<button class="btn btn-small btn-primary" ng-click="addProjekt()">Dodaj projekt</button>
+	</div>
+</div>
+
+	
+
+<br/>
+<div class="col-md-6 panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><label>Projekti</label></div>
+  <table class="table">
+  	<thead>
+  		<tr>
+  			<th>Naziv</th>
+			<th>Autor</th>
+			<th></th>
+			<th></th>
+  		</tr>
+  	</thead>
+	<tr ng-repeat="proj in projekti">
+		<td class="col-md-7">{{proj.naziv}}</td>
+		<td class="col-md-3">{{proj.avtor}}</td>
+		<td class="col-md-1"><a ng-click="urediProjekt(proj.id)" class="btn btn-small btn">Uredi</a></td>
+		<td class="col-md-1"><a ng-click="odstraniProjekt(proj.id)" class="btn btn-small btn-danger">Zbriši</a></td>
+	</tr>
+
+  </table>
+</div>

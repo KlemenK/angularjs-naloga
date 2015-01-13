@@ -1,0 +1,116 @@
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a data-target="#home" aria-controls="home" role="tab" data-toggle="tab">Zaposleni na projektu</a></li>
+    <!--    <li role="presentation"><a data-target="#tab_taski" aria-controls="tab_taski" role="tab" data-toggle="tab">Taski</a></li> -->
+    <li role="presentation"><a data-target="#tab_dodajanje" aria-controls="tab_dodajanje" role="tab" data-toggle="tab">Zaposleni / Task</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+        <ul class="nav nav-pills" role="tablist">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                  <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Priimek</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="zap in zaposleniNaProjektu">
+                        <td class="col-md-3">{{zap.ime}}</td>
+                        <td class="col-md-3">{{zap.priimek}}</td>
+                        <td class="col-md-1"><a ng-click="urediTaske(zap.id,zap.ime,zap.priimek)" class="btn btn-small btn">Uredi taske</a></td>
+                        <td class="col-md-1"><a ng-click="odstraniZapIzProjekt(zap.id)" class="btn btn-small btn-danger">Odstrani iz projekta</a></td>
+                    </tr>
+
+                </table>      
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="tab_taski">
+        <div class="panel panel-default col-md-12">
+          <!-- Default panel contents -->
+
+          <div>
+            Prosti taski
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Čas izvedbe</th>
+                    <th>Prioriteta</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr ng-repeat="task in taskiNaProjektu">
+                <td class="col-md-6">{{task.naziv}}</td>
+                <td class="col-md-3">{{task.casIzvedbe}}</td>
+                <td class="col-md-1">{{task.prioriteta}}</td>
+                <td class="col-md-1"><a ng-click="urediTask(task.id)" class="btn btn-small btn">Uredi task</a></td>
+                <td class="col-md-1"><a ng-click="odstraniTaskIzProjekta(task.id)" class="btn btn-small btn-danger">Odstrani task</a></td>
+
+            </tr>
+
+        </table>
+    </div>
+</div>
+<div role="tabpanel" class="tab-pane" id="tab_dodajanje">
+<div class="well">
+    <label>Izberi zaposlenega katerega želiš dodat na projekt in mu izberi taske</label>
+    <br/>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Zaposleni:</label>
+            <select ng-model="selectedItem">
+                <option ng-repeat="obj in zaposleni" value="{{obj.id}}">{{obj.ime}} {{obj.priimek}}</option>
+            </select>
+            <a ng-click="dodajZapNaProjekt(selectedItem)" role="button" class="btn btn-primary">Dodaj na projekt</a>
+        </div>
+        <div class="col-md-6 text-right">
+            <a ng-click="createTask()" role="button" class="btn btn-primary glyphicon glyphicon-plus"> Task</a>
+        </div>
+        
+     </div>
+      <ul>
+        <li ng-repeat="t in izbraniTaski"><label class="badge" ng-click="odstraniOdIzbrani(t)">{{t.naziv}}</label></li>
+      </ul>
+  
+</div>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><label>Prosti taski na projektu</label></div>
+  <table class="table">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Čas izvedbe</th>
+            <th>Prioriteta</th>
+            <th>Opis</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tr ng-repeat="task in taskiNaProjektu">
+        <td class="col-md-3">{{task.naziv}}</td>
+        <td class="col-md-2">{{task.casIzvedbe}}</td>
+        <td class="col-md-1">{{task.prioriteta}}</td>
+        <td class="col-md-5">{{task.opis}}</td>
+        <td class="col-md-1">
+            <a ng-click="dodajTaskZaposlenemu(task)" role="button" class="btn btn-success glyphicon glyphicon-plus"/>
+        </td>
+    </tr>
+
+</table>
+</div>
+
+</div>
+</div>
+
